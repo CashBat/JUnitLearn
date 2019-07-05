@@ -2,6 +2,7 @@ package lern;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -34,26 +35,63 @@ public class StringUtilsParameterizedTest {
 //		assertEquals(boo, arg);
 //	}
 	
-	private Boolean boo;
-	private String arg;
+//	private Boolean boo;
+//	private String arg;
+//
+//	public StringUtilsParameterizedTest(Boolean boo, String arg) {
+//		System.out.println("sss");
+//		this.boo = boo;
+//		this.arg = arg;
+//	}
+//
+//	@Parameters
+//	public static Collection<Object[]> getTestParameters() { //перед тестом юзается конструктор, его поля(boo и arg) заполняется из этой колекции объектов. Тест завалится если какогото значения в масиве будет не хватать для заполнения аргумента({ Boolean.FALSE})
+//
+//		Object[][] a = new Object[][] { { Boolean.FALSE, "1234" }, { Boolean.TRUE, "1212" }, { Boolean.FALSE, "1" }, { Boolean.TRUE, "12" } };
+//		return Arrays.asList(a);
+//	}
+//
+//	@Test
+//	public void testAre2CharsAtHeadAndTailEqual() {
+//		StingUtils su = new StingUtils();
+//		assertEquals(boo, su.are2CharsAtHeadAndTailEquel(arg));
+//	}
 
-	public StringUtilsParameterizedTest(Boolean boo, String arg) {
-		System.out.println("sss");
-		this.boo = boo;
+	
+	private User expecteds;
+	private User arg;
+
+
+	public StringUtilsParameterizedTest(User expecteds, User arg) {
+		this.expecteds = expecteds;
 		this.arg = arg;
 	}
 
-	@Parameters
-	public static Collection<Object[]> getTestParameters() { //перед тестом юзается конструктор, его поля(boo и arg) заполняется из этой колекции объектов. Тест завалится если какогото значения в масиве будет не хватать для заполнения аргумента({ Boolean.FALSE})
-
-		Object[][] a = new Object[][] { { Boolean.FALSE, "1234" }, { Boolean.TRUE, "1212" }, { Boolean.FALSE, "1" }, { Boolean.TRUE, "12" } };
-		return Arrays.asList(a);
+	@Parameters 
+	public static Collection<User[]>getTestParameters() { //перед тестом юзается конструктор, его поля(boo и arg) заполняется из этой колекции объектов. Тест завалится если какогото значения в масиве будет не хватать для заполнения аргумента({ Boolean.FALSE})
+		User user = new User("Pasha",26);	
+		
+									       //первая строка                     вторая
+									  //первый столбец     второй
+		User[][] a = new User[][] { { new User("Pasha",27), user }, { new User("Pasha",28),user } };
+		return Arrays.asList(a); //возвращается двумерный массив - двумерный потомучто нужно задать два индекса для нахождения нужного объекта, а не потомучто тут типо два параметра(столбца)
 	}
 
+	/**
+	 * создает юзера 26 лет, создает массив ожидаемых (expecteds) юзеров. Тагже в него засовывается юзер который будет поддвергаться изменению arg. каждая строка масива, это новый тест в будующем.
+	 * данный масив возвращается в jUnit классы, запускается цикл, где он начинает перебираться. В процессе перебора, создается конструктор теста, в него каждый раз сасовываются параметры с масива. expecteds- ожидаемый юзер уже с увеличеным числом лет и ссылка на юзера который подвергается изменению-посути аргумент для проверяемого метода (upUserAge)
+	 * конструктор создался, его поля заполнелись, далее запускается метод с логигой теста (testAre2CharsAtHeadAndTailEqual). Для своих операций, он использует данные полей, заполненых конструктором на текущей итерации.
+	 * так как юзер аргумент не пересоздается (метод getTestParameters вызывается всего один), ссылка на него сохраняется из теста в тест, и поэтому сохроняется реузльтат изменения возвраста из прошлого теста
+	 */
+	
 	@Test
 	public void testAre2CharsAtHeadAndTailEqual() {
 		StingUtils su = new StingUtils();
-		assertEquals(boo, su.are2CharsAtHeadAndTailEquel(arg));
+		su.upUserAge(arg);
+		User actual = arg;
+		assertEquals(expecteds, actual);
 	}
 
+	
+	
 }

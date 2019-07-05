@@ -23,6 +23,10 @@ public class StingUtils {
 		
 	}
 	
+	public static void upUserAge(User user) {
+		user.setAge(user.getAge()+1);
+	}
+	
 	
 	
 	
