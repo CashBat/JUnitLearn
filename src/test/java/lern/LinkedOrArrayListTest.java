@@ -12,7 +12,7 @@ public class LinkedOrArrayListTest {
 
 	static List<String> arrayList;
 	static List<String> linkedList;
-	
+	//С‚РµСЃС‚РёСЂСѓРµРј РїСЂРѕРёР·РІРѕРґРёС‚РµР»СЊРЅРѕСЃС‚СЊ
 	@BeforeClass
 	public static void setUpBeforeClass() {
 		System.out.println("Popelating ArrayList... ");
@@ -25,7 +25,7 @@ public class LinkedOrArrayListTest {
 		 
 	}
 	
-	@Test(timeout = 1) //в миллисикундах(на 6 нулей больше чем нано)
+	@Test(timeout = 1) //пїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ(пїЅпїЅ 6 пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅ)
 	public void testRemoval_LL() {
 		LinkedOrArrayList.remove(linkedList, "123");		
 	}
