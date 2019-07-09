@@ -27,4 +27,14 @@ public class FruitsBasket {
 		basket.clear();
 	}
 	
+	public boolean addLot (List<Fruit> lot) {
+		return basket.addAll(lot);
+		
+	}
+	
+	public static String[] greet(String wish) {
+	return	wish.split("[ !]");
+		
+	}
+	
 }
